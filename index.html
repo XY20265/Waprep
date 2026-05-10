@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Washington Preparatory School</title>
     <style>
         * {
@@ -13,67 +13,80 @@
 
         body {
             min-height: 100vh;
-            background: radial-gradient(ellipse at 30% 40%, #0a0f2a, #02050f);
-            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            background: radial-gradient(ellipse at 40% 50%, #0b102c, #010105);
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
             overflow-x: hidden;
+            overflow-y: auto;  /* 允许上下滑动 */
         }
 
-        /* 星空闪烁效果 */
-        body::before {
-            content: "";
+        .space-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(2px 2px at 15% 30%, #fff, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 72% 18%, #f8f3e0, rgba(0,0,0,0)),
-                radial-gradient(3px 2px at 45% 65%, #fffaec, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 92% 80%, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 8% 90%, #ffe6b0, rgba(0,0,0,0));
-            background-repeat: no-repeat;
-            background-size: 200px 200px, 150px 150px, 280px 280px, 120px 120px, 180px 180px;
-            opacity: 0.6;
-            pointer-events: none;
-            z-index: 0;
-            animation: twinkle 8s infinite alternate;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 40%, rgba(80, 60, 150, 0.3), transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(200, 100, 150, 0.2), transparent 60%),
+                radial-gradient(circle at 40% 90%, rgba(50, 150, 200, 0.2), transparent 70%);
         }
 
-        @keyframes twinkle {
-            0% { opacity: 0.3; }
-            100% { opacity: 0.9; }
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image: 
+                radial-gradient(2px 2px at 15% 30%, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 55% 18%, #f8f3e0, rgba(0,0,0,0)),
+                radial-gradient(3px 2px at 85% 65%, #fffaec, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 12% 80%, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 2px at 92% 45%, #ffe6b0, rgba(0,0,0,0)),
+                radial-gradient(2px 1px at 48% 95%, #d9e6ff, rgba(0,0,0,0));
+            background-repeat: no-repeat;
+            background-size: 300px 300px, 200px 200px, 350px 350px, 250px 250px, 280px 280px, 180px 180px;
+            opacity: 0.8;
+            animation: starTwinkle 5s infinite alternate;
+        }
+
+        @keyframes starTwinkle {
+            0% { opacity: 0.4; }
+            100% { opacity: 1; }
         }
 
         .main {
             position: relative;
             z-index: 2;
-            text-align: center;
-            max-width: 1000px;
-            padding: 2rem 2rem 6rem 2rem;
-            flex: 1;
+            width: 100%;
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 3rem 2rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            min-height: calc(100vh - 140px);  /* 确保内容在视口中央，但底部留出空间给链接，超出可滚动 */
         }
 
+        /* 每个句子独立行，动画 */
         .line {
-            font-size: clamp(1.2rem, 5vw, 2rem);
-            font-weight: 400;
-            color: #f0f3fc;
-            text-shadow: 0 0 5px rgba(70, 130, 200, 0.4);
-            margin: 1rem 0;
-            line-height: 1.4;
-            letter-spacing: -0.01em;
+            text-align: center;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeUp 0.6s forwards;
+            margin: 0.7rem 0;
+            font-weight: 400;
+            color: #eef2fc;
+            text-shadow: 0 0 4px rgba(100, 150, 255, 0.3);
         }
 
         .line:nth-child(1) { animation-delay: 0.1s; }
@@ -89,42 +102,68 @@
             }
         }
 
-        .line:nth-child(2) {
-            font-weight: 600;
-            font-size: clamp(1.5rem, 6vw, 2.5rem);
-            background: linear-gradient(135deg, #ffffff, #b9c7e9);
+        .line:first-child {
+            font-size: clamp(2rem, 9vw, 4.2rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(135deg, #FFFFFF, #D6B0FF, #6CC3FF);
+            background-size: 200% auto;
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
+            animation: fadeUp 0.6s forwards, textFlow 3s linear infinite;
             text-shadow: none;
         }
 
-        /* 触发弹出白色信件的按钮 */
+        @keyframes textFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .line:nth-child(2) {
+            font-size: clamp(1.4rem, 5vw, 2.2rem);
+            font-weight: 600;
+            background: linear-gradient(120deg, #f5f0e8, #cfdbf5);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        /* 其他行正常大小 */
+        .line:nth-child(n+3) {
+            font-size: clamp(1rem, 3.5vw, 1.3rem);
+            max-width: 85%;
+        }
+
         .letter-trigger {
-            margin-top: 2rem;
-            background: rgba(210, 180, 140, 0.15);
+            margin-top: 2.5rem;
+            background: rgba(255, 235, 200, 0.1);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(210, 180, 140, 0.5);
-            padding: 0.6rem 1.8rem;
-            border-radius: 40px;
-            color: #e6d5b3;
-            font-size: 0.9rem;
+            border: 1px solid rgba(210, 180, 140, 0.6);
+            padding: 0.7rem 2rem;
+            border-radius: 60px;
+            color: #ffecce;
+            font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            z-index: 3;
+            gap: 0.6rem;
+            letter-spacing: 0.3px;
         }
+
         .letter-trigger:hover {
-            background: rgba(210, 180, 140, 0.35);
-            color: #fff2df;
-            border-color: #dbb87c;
+            background: rgba(210, 180, 140, 0.25);
+            color: #ffffff;
+            border-color: #e7c28e;
             transform: scale(1.02);
         }
 
-        /* 模态框（白信） */
+        /* 模态框 — 白色信笺 */
         .modal {
             display: none;
             position: fixed;
@@ -132,144 +171,142 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
         }
+
         .modal-content {
             background: #fffef7;
-            max-width: 800px;
+            max-width: 750px;
             width: 90%;
             max-height: 85vh;
-            overflow-y: auto;
-            border-radius: 24px;
+            border-radius: 32px;
             padding: 2rem 2rem 2rem 2rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5);
             font-family: 'Georgia', 'Times New Roman', serif;
-            color: #1e2a3a;
+            color: #1e2a2e;
             position: relative;
-            animation: fadeSlideUp 0.3s ease;
+            overflow-y: auto;
+            animation: letterPop 0.3s ease-out;
         }
-        @keyframes fadeSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+
+        @keyframes letterPop {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
-        .modal-content h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            letter-spacing: -0.3px;
-            border-left: 5px solid #b98f4b;
-            padding-left: 1rem;
-            margin-bottom: 1.5rem;
-            color: #2c3e2f;
-        }
-        .modal-content p {
-            line-height: 1.65;
-            margin-bottom: 1rem;
-            font-size: 1rem;
-        }
-        .signature {
-            margin-top: 1.8rem;
-            text-align: right;
-            font-style: italic;
-            font-weight: 500;
-            border-top: 1px solid #e2dccd;
-            padding-top: 1rem;
-        }
+
         .close-modal {
             position: absolute;
             top: 1rem;
             right: 1.5rem;
-            font-size: 1.8rem;
+            font-size: 2rem;
             cursor: pointer;
-            color: #8f7a5c;
+            color: #8f7355;
             transition: color 0.2s;
             line-height: 1;
         }
+
         .close-modal:hover {
-            color: #000;
+            color: #2c1a0c;
         }
 
-        /* 底部链接 + 版权 */
+        /* 信件头部 */
+        .letter-header {
+            font-size: 1.7rem;
+            font-weight: 700;
+            border-left: 5px solid #b68b40;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            color: #2b3b2b;
+        }
+
+        /* 单词逐个出现的容器 */
+        .word-by-word {
+            line-height: 1.65;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .word {
+            display: inline-block;
+            opacity: 0;
+            animation: wordFadeIn 0.08s forwards;
+            margin-right: 0.25rem;
+        }
+
+        @keyframes wordFadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .signature {
+            margin-top: 2rem;
+            text-align: right;
+            font-style: italic;
+            font-weight: 500;
+            border-top: 1px solid #e2d9c8;
+            padding-top: 1rem;
+        }
+
+        /* 底部链接区域 */
         .footer-links {
-            position: fixed;
-            bottom: 2rem;
-            left: 0;
+            position: relative;
             width: 100%;
             text-align: center;
-            z-index: 10;
+            padding: 1.5rem 1rem 2rem;
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             justify-content: center;
             flex-wrap: wrap;
             background: transparent;
-            padding: 0.8rem;
+            margin-top: auto;
         }
+
         .footer-links a {
-            color: #9aa9c7;
+            color: #9ea9cf;
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
-            transition: color 0.25s ease, transform 0.2s;
+            transition: color 0.2s, transform 0.2s;
             padding: 0.2rem 0.5rem;
             border-radius: 20px;
         }
+
         .footer-links a:hover {
-            color: #ffdfa5;
+            color: #ffdfaa;
             transform: translateY(-2px);
-            background: rgba(30, 40, 70, 0.5);
+            background: rgba(40, 50, 80, 0.4);
         }
+
         .copyright {
-            position: fixed;
-            bottom: 0.8rem;
-            left: 0;
-            width: 100%;
             text-align: center;
             font-size: 0.7rem;
-            color: #5f6f8a;
-            z-index: 10;
-            pointer-events: none;
+            color: #6b7c9e;
+            padding: 0 1rem 2rem;
+            width: 100%;
         }
-        @media (max-width: 600px) {
-            .main {
-                padding-bottom: 5rem;
-            }
-            .line {
-                margin: 0.8rem 0;
-            }
-            .footer-links {
-                bottom: 1.5rem;
-                gap: 1.5rem;
-            }
-            .copyright {
-                bottom: 0.3rem;
-            }
-            .modal-content {
-                padding: 1.5rem;
-            }
-            .modal-content h2 {
-                font-size: 1.4rem;
-            }
+
+        /* 确保滚动条可见且页面可滚动 */
+        body {
+            scrollbar-width: thin;
         }
     </style>
 </head>
 <body>
+    <div class="space-bg"></div>
+    <div class="stars"></div>
+
     <div class="main">
-        <div class="line">Welcome come to Washington Preparatory School</div>
+        <!-- 第一句：超大加粗 + 颜色变换，位于正中为主 -->
+        <div class="line">Welcome come to Washington Preparatory School !</div>
         <div class="line">We are Small. Focused. Differentiated.</div>
         <div class="line">Expert instruction by an internationally trained, world-class faculty.</div>
         <div class="line">Small group learning powered by STEM-infused projects.</div>
         <div class="line">Flexible, diverse programming that caters to each individual student.</div>
-        
-        <!-- 触发白色信件的优雅按钮 -->
+
         <div class="letter-trigger" id="openLetterBtn">
             ✉️ From Our Head of School
         </div>
@@ -287,34 +324,67 @@
     <div id="letterModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" id="closeModalBtn">&times;</span>
-            <h2>From Our Head of School</h2>
-            <p>Welcome to Washington Preparatory School (WAPrep), a 6th -12th-grade college preparatory school that emphasizes STEM, project learning, communication skills, and entrepreneurial thinking. WAPrep opened its doors in the fall of 2018, and the faculty are looking forward to beginning our seventh academic school year.</p>
-            <p>WA Prep has been committed to continuously improve and uphold the standards to which our accrediting association, Accreditation International, expects from us as evidenced by its successful 5-year review and renewal, in addition the school is approved by the Washington state board of education. It was a goal from the very beginning to become an approved International Baccalaureate Organization, which was earned in 2020. In 2025, the schools third cohort of seniors is working hard to complete the IB diploma. Our school is proud to be an international, multicultural, and multilingual campus.</p>
-            <p>Our facilities have evolved as well. In 2023, the school relocated across the road from our original business park facility. This relocation provided a stand-alone building to call our own and is ideally located across the street from the future campus that is currently under construction.</p>
-            <p>Visitors often ask, “What are the differentiators that WA Prep offers that other independent schools do not?” I respond that our faculty are life-long learners, experts in their fields, strategic planners, and coaches who motivate our students to achieve their goals. Our students thrive because they are willing to work alongside their peers and teachers. It is a willingness that enables them to embrace new and unfamiliar challenges with what I call an “I can do this” approach.</p>
-            <p>The guiding principles of WA Prep, our five pillars, allow students to engage in our rapidly changing world effectively. Academic excellence achieved with the internationally renowned International Baccalaureate Diploma Program for juniors and seniors, AP Calculus, AP Physics and AP Computer Science, international and intercultural involvement, experiential learning opportunities, service learning and leadership, and STEEM (science, technology, entrepreneurship engineering, and math) creates a relevant and healthy recipe for successful college preparation.</p>
-            <p>Washington State has been my home for the last thirty-two years. Before jumping on board with WA Prep, I enjoyed serving in two highly respected independent schools. Nine years at Charles Wright Academy and, more recently, twenty years at Seattle Academy of Arts and Sciences. I have served as teacher, coach, outdoor and international trip leader, dean of students, head of upper school, and dean of faculty for STEM program areas. In each of these roles, I was responsible for providing opportunities for each student to grow academically and personally.</p>
-            <p>I invite you to become a part of the Washington Preparatory School experience. It is a school that will inspire students to be prepared for future careers and embrace life to its fullest</p>
+            <div class="letter-header">From Our Head of School</div>
+            <div id="letterWords" class="word-by-word"></div>
             <div class="signature">Mindy J. Watson<br>Head of School</div>
         </div>
     </div>
 
     <script>
+        // 完整的校长致辞内容（按您提供的原文）
+        const fullLetter = `Welcome to Washington Preparatory School (WAPrep), a 6th -12th-grade college preparatory school that emphasizes STEM, project learning, communication skills, and entrepreneurial thinking. WAPrep opened its doors in the fall of 2018, and the faculty are looking forward to beginning our seventh academic school year.
+
+WA Prep has been committed to continuously improve and uphold the standards to which our accrediting association, Accreditation International, expects from us as evidenced by its successful 5-year review and renewal, in addition the school is approved by the Washington state board of education. It was a goal from the very beginning to become an approved International Baccalaureate Organization, which was earned in 2020. In 2025, the schools third cohort of seniors is working hard to complete the IB diploma. Our school is proud to be an international, multicultural, and multilingual campus.
+
+Our facilities have evolved as well. In 2023, the school relocated across the road from our original business park facility. This relocation provided a stand-alone building to call our own and is ideally located across the street from the future campus that is currently under construction.
+
+Visitors often ask, “What are the differentiators that WA Prep offers that other independent schools do not?” I respond that our faculty are life-long learners, experts in their fields, strategic planners, and coaches who motivate our students to achieve their goals. Our students thrive because they are willing to work alongside their peers and teachers. It is a willingness that enables them to embrace new and unfamiliar challenges with what I call an “I can do this” approach.
+
+The guiding principles of WA Prep, our five pillars, allow students to engage in our rapidly changing world effectively. Academic excellence achieved with the internationally renowned International Baccalaureate Diploma Program for juniors and seniors, AP Calculus, AP Physics and AP Computer Science, international and intercultural involvement, experiential learning opportunities, service learning and leadership, and STEEM (science, technology, entrepreneurship engineering, and math) creates a relevant and healthy recipe for successful college preparation.
+
+Washington State has been my home for the last thirty-two years. Before jumping on board with WA Prep, I enjoyed serving in two highly respected independent schools. Nine years at Charles Wright Academy and, more recently, twenty years at Seattle Academy of Arts and Sciences. I have served as teacher, coach, outdoor and international trip leader, dean of students, head of upper school, and dean of faculty for STEM program areas. In each of these roles, I was responsible for providing opportunities for each student to grow academically and personally.
+
+I invite you to become a part of the Washington Preparatory School experience. It is a school that will inspire students to be prepared for future careers and embrace life to its fullest`;
+
+        function splitIntoWords(text) {
+            return text.match(/\S+\s*/g) || [];
+        }
+
+        function animateWords(container, words) {
+            container.innerHTML = '';
+            words.forEach((word, idx) => {
+                const span = document.createElement('span');
+                span.textContent = word;
+                span.classList.add('word');
+                span.style.animationDelay = `${idx * 0.02}s`; 
+                container.appendChild(span);
+            });
+        }
+
+        // 弹窗控制 + 逐词动画（每次打开重新播放）
         const modal = document.getElementById('letterModal');
         const openBtn = document.getElementById('openLetterBtn');
         const closeBtn = document.getElementById('closeModalBtn');
+        const letterContainer = document.getElementById('letterWords');
+        let wordsArray = splitIntoWords(fullLetter);
 
         openBtn.addEventListener('click', () => {
             modal.style.display = 'flex';
+            animateWords(letterContainer, wordsArray);
         });
+
         closeBtn.addEventListener('click', () => {
             modal.style.display = 'none';
         });
+
         window.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.style.display = 'none';
             }
         });
+
+        // 预先生成一次，但不显示（等待弹窗打开时生成）
+        // 可选：确保滚动流畅，保留上下文
     </script>
 </body>
 </html>
