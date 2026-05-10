@@ -13,13 +13,15 @@
 
         body {
             min-height: 100vh;
-            background: radial-gradient(ellipse at 30% 40%, #0b0f2a, #030617, #010108);
+            background: radial-gradient(ellipse at 30% 40%, #0a0f2a, #020510, #00010a);
             font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
             overflow-x: hidden;
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* ========= 流星效果 ========= */
+        /* 流星 */
         .shooting-star {
             position: fixed;
             top: 0;
@@ -32,10 +34,10 @@
         }
         .star {
             position: absolute;
-            background: linear-gradient(45deg, #ffffff, #ffecb3);
+            background: linear-gradient(45deg, #ffffff, #b0c4ff);
             border-radius: 50%;
-            box-shadow: 0 0 4px 2px rgba(255, 255, 200, 0.6);
-            opacity: 0.8;
+            box-shadow: 0 0 6px 2px rgba(160, 200, 255, 0.8);
+            opacity: 0.9;
             animation: shoot 4s linear infinite;
         }
         @keyframes shoot {
@@ -43,24 +45,21 @@
                 transform: translateX(0) translateY(0) rotate(0deg);
                 opacity: 1;
             }
-            80% {
-                opacity: 1;
-            }
+            80% { opacity: 1; }
             100% {
                 transform: translateX(-400px) translateY(300px) rotate(45deg);
                 opacity: 0;
             }
         }
-        /* 多颗流星不同延迟 */
-        .star1 { top: 10%; left: 80%; width: 3px; height: 3px; animation-duration: 3.2s; animation-delay: 0s; }
-        .star2 { top: 30%; left: 70%; width: 2px; height: 2px; animation-duration: 4s; animation-delay: 1s; }
-        .star3 { top: 55%; left: 85%; width: 4px; height: 4px; animation-duration: 5s; animation-delay: 0.5s; }
-        .star4 { top: 75%; left: 60%; width: 2px; height: 2px; animation-duration: 3.5s; animation-delay: 2.2s; }
-        .star5 { top: 15%; left: 90%; width: 3px; height: 3px; animation-duration: 4.5s; animation-delay: 0.8s; }
-        .star6 { top: 45%; left: 50%; width: 2px; height: 2px; animation-duration: 3.8s; animation-delay: 1.5s; }
-        .star7 { top: 85%; left: 75%; width: 3px; height: 3px; animation-duration: 4.2s; animation-delay: 3s; }
+        .star1 { top: 8%; left: 85%; width: 3px; height: 3px; animation-duration: 3s; animation-delay: 0s; }
+        .star2 { top: 25%; left: 70%; width: 2px; height: 2px; animation-duration: 4.2s; animation-delay: 0.8s; }
+        .star3 { top: 50%; left: 80%; width: 4px; height: 4px; animation-duration: 5s; animation-delay: 1.5s; }
+        .star4 { top: 70%; left: 60%; width: 2px; height: 2px; animation-duration: 3.6s; animation-delay: 2.2s; }
+        .star5 { top: 15%; left: 90%; width: 3px; height: 3px; animation-duration: 4.8s; animation-delay: 0.3s; }
+        .star6 { top: 40%; left: 50%; width: 2px; height: 2px; animation-duration: 3.9s; animation-delay: 1.1s; }
+        .star7 { top: 85%; left: 75%; width: 3px; height: 3px; animation-duration: 4.5s; animation-delay: 2.7s; }
 
-        /* 星空闪烁背景增强 */
+        /* 星空闪烁 */
         .bg-stars {
             position: fixed;
             top: 0;
@@ -70,65 +69,62 @@
             pointer-events: none;
             background-image: 
                 radial-gradient(1px 1px at 12% 22%, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 1px at 45% 68%, #ffe3b0, rgba(0,0,0,0)),
+                radial-gradient(2px 1px at 45% 68%, #bbd9ff, rgba(0,0,0,0)),
                 radial-gradient(1px 1px at 78% 32%, #fff, rgba(0,0,0,0)),
-                radial-gradient(3px 2px at 34% 91%, #fff6d0, rgba(0,0,0,0)),
+                radial-gradient(3px 2px at 34% 91%, #d9c8ff, rgba(0,0,0,0)),
                 radial-gradient(1px 1px at 91% 55%, #fff, rgba(0,0,0,0));
             background-repeat: no-repeat;
             background-size: 300px 300px, 200px 200px, 250px 250px, 180px 180px, 220px 220px;
-            opacity: 0.7;
+            opacity: 0.6;
             z-index: 0;
-            animation: starTwinkle 6s infinite alternate;
+            animation: starTwinkle 7s infinite alternate;
         }
         @keyframes starTwinkle {
-            0% { opacity: 0.4; }
-            100% { opacity: 0.9; }
+            0% { opacity: 0.3; }
+            100% { opacity: 0.8; }
         }
 
-        /* 主内容区，可滚动 */
-        .content-wrapper {
+        /* 内容区，撑开高度让底部自然沉底 */
+        .content {
             position: relative;
             z-index: 2;
-            min-height: 100vh;
+            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 4rem 2rem 8rem 2rem;
+            padding: 4rem 2rem 3rem 2rem;
         }
 
-        /* 中央核心区域 */
         .hero-center {
             text-align: center;
             max-width: 900px;
-            margin: 2rem auto;
+            margin: 1rem auto;
         }
 
-        /* Welcome 主标题 —— 正中间，最大，加粗，颜色变换 */
+        /* Welcome 标题：黑/蓝/紫渐变 */
         .main-welcome {
             font-size: clamp(2.2rem, 8vw, 4.5rem);
             font-weight: 800;
             letter-spacing: -0.02em;
             margin-bottom: 2rem;
-            background: linear-gradient(135deg, #ffffff, #f5d742, #ffb347, #ffffff);
+            background: linear-gradient(135deg, #0a0f2a, #2c3e8f, #5a4a9e, #0f0c2c);
             background-size: 300% auto;
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            animation: gradientFlow 4s ease infinite;
-            text-shadow: 0 0 20px rgba(255,215,0,0.3);
+            animation: gradientShift 6s ease infinite;
         }
-        @keyframes gradientFlow {
+        @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* 其他句子（正常字体） */
         .sub-line {
-            font-size: 1.3rem;
-            margin: 1rem 0;
-            color: #e2e8ff;
+            font-size: 1.2rem;
+            margin: 0.8rem 0;
+            color: #cfdcff;
             font-weight: 400;
             opacity: 0;
             transform: translateY(20px);
@@ -146,66 +142,76 @@
             }
         }
 
-        /* 触发按钮 */
+        /* 底部区域容器 - 固定在最底部 */
+        .bottom-section {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            margin-top: 4rem;
+            padding: 1rem 2rem 2rem 2rem;
+            background: transparent;
+        }
+
+        /* Letter 按钮：左对齐，不要居中，放在链接前面 */
+        .letter-btn-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+        }
         .letter-btn {
-            margin-top: 2.8rem;
-            background: rgba(100, 80, 140, 0.35);
+            background: rgba(30, 40, 70, 0.6);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(230, 200, 120, 0.8);
-            padding: 0.8rem 2rem;
-            border-radius: 60px;
-            font-size: 1.1rem;
+            border: 1px solid rgba(150, 170, 220, 0.8);
+            padding: 0.6rem 1.8rem;
+            border-radius: 40px;
+            font-size: 1rem;
             font-weight: 600;
-            color: #ffefcf;
+            color: #e2eaff;
             cursor: pointer;
             transition: 0.25s;
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
-            box-shadow: 0 0 10px rgba(255,215,0,0.3);
+            gap: 0.5rem;
         }
         .letter-btn:hover {
-            background: rgba(160, 130, 200, 0.5);
+            background: rgba(80, 100, 150, 0.7);
+            color: #ffffff;
+            border-color: #b8ceff;
             transform: scale(1.02);
-            border-color: #ffde9c;
-            box-shadow: 0 0 20px rgba(255, 200, 80, 0.5);
         }
 
-        /* 底部链接区域 */
-        .footer-bottom {
-            position: relative;
-            z-index: 5;
-            text-align: center;
-            padding: 2rem 1rem 2rem;
-            margin-top: 3rem;
-        }
+        /* 两个链接容器：真正底部 */
         .footer-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 1.2rem;
+            margin-bottom: 0.8rem;
         }
         .footer-links a {
-            color: #b9c8ff;
+            color: #9ab3e0;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 500;
-            transition: all 0.2s;
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
+            transition: color 0.2s, transform 0.2s;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
         }
         .footer-links a:hover {
-            color: #ffe2a4;
-            background: rgba(70, 60, 120, 0.5);
+            color: #ffddb0;
             transform: translateY(-2px);
+            background: rgba(40, 50, 80, 0.5);
         }
         .copyright {
-            font-size: 0.75rem;
-            color: #6e7b9e;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #6a7a9e;
+            margin-top: 0.3rem;
         }
 
-        /* 白色弹窗模态框 */
+        /* 白色信笺弹窗 */
         .modal {
             display: none;
             position: fixed;
@@ -213,58 +219,58 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(8, 6, 20, 0.85);
-            backdrop-filter: blur(8px);
+            background-color: rgba(5, 3, 15, 0.85);
+            backdrop-filter: blur(6px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
         }
         .modal-card {
-            background: #fffdf7;
+            background: #fffef7;
             max-width: 750px;
             width: 90%;
             max-height: 85vh;
             overflow-y: auto;
             border-radius: 28px;
             padding: 2rem 2rem 2rem 2rem;
-            box-shadow: 0 30px 55px rgba(0,0,0,0.5);
+            box-shadow: 0 30px 50px rgba(0,0,0,0.5);
             font-family: 'Georgia', 'Times New Roman', serif;
             position: relative;
-            animation: modalPop 0.35s ease;
+            animation: modalPop 0.3s ease;
         }
         @keyframes modalPop {
             from { opacity: 0; transform: scale(0.96) translateY(20px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
         .modal-card h2 {
-            font-size: 1.9rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            border-left: 6px solid #cfaa6e;
+            border-left: 6px solid #a47c48;
             padding-left: 1rem;
             margin-bottom: 1.2rem;
-            color: #2c2a24;
+            color: #2f2a23;
         }
         .letter-text {
             font-size: 1rem;
             line-height: 1.65;
-            color: #1f2a2e;
+            color: #232b30;
         }
         .word {
             display: inline-block;
             opacity: 0;
-            animation: wordAppear 0.05s forwards;
+            animation: wordAppear 0.04s forwards;
         }
         @keyframes wordAppear {
-            from { opacity: 0; transform: translateX(6px); }
+            from { opacity: 0; transform: translateX(4px); }
             to { opacity: 1; transform: translateX(0); }
         }
         .close-modal {
             position: absolute;
-            top: 1rem;
-            right: 1.4rem;
+            top: 0.8rem;
+            right: 1.2rem;
             font-size: 2rem;
             cursor: pointer;
-            color: #a5804a;
+            color: #aa7e4c;
             transition: 0.2s;
         }
         .close-modal:hover {
@@ -280,44 +286,42 @@
         }
         @media (max-width: 650px) {
             .sub-line { font-size: 1rem; }
-            .main-welcome { font-size: 2.2rem; }
-            .letter-btn { font-size: 0.9rem; }
+            .main-welcome { font-size: 2rem; }
+            .letter-btn { font-size: 0.85rem; }
+            .footer-links { gap: 1rem; }
         }
     </style>
 </head>
 <body>
-
 <div class="shooting-star">
-    <div class="star star1"></div>
-    <div class="star star2"></div>
-    <div class="star star3"></div>
-    <div class="star star4"></div>
-    <div class="star star5"></div>
-    <div class="star star6"></div>
+    <div class="star star1"></div><div class="star star2"></div><div class="star star3"></div>
+    <div class="star star4"></div><div class="star star5"></div><div class="star star6"></div>
     <div class="star star7"></div>
 </div>
 <div class="bg-stars"></div>
 
-<div class="content-wrapper">
+<div class="content">
     <div class="hero-center">
-        <!-- 正中间，最大加粗颜色变换 -->
         <div class="main-welcome">Welcome to Washington Preparatory School!</div>
-        
         <div class="sub-line">We are Small. Focused. Differentiated.</div>
         <div class="sub-line">Expert instruction by an internationally trained, world-class faculty.</div>
         <div class="sub-line">Small group learning powered by STEM-infused projects.</div>
         <div class="sub-line">Flexible, diverse programming that caters to each individual student.</div>
-
-        <div class="letter-btn" id="openLetterBtn">📩 Read Letter from Head of School</div>
     </div>
+</div>
 
-    <div class="footer-bottom">
-        <div class="footer-links">
-            <a href="https://www.niche.com/k12/washington-preparatory-school-bothell-wa/" target="_blank" rel="noopener noreferrer">Niche</a>
-            <a href="https://www.facebook.com/profile.php?id=100083351671753" target="_blank" rel="noopener noreferrer">Facebook</a>
+<!-- 底部区域：letter按钮（左对齐，在链接前面） + 两个链接 + 版权 -->
+<div class="bottom-section">
+    <div class="letter-btn-wrapper">
+        <div class="letter-btn" id="openLetterBtn">
+            📬 Read Letter from Head of School
         </div>
-        <div class="copyright">© 2018–2026 Washington Preparatory School</div>
     </div>
+    <div class="footer-links">
+        <a href="https://www.niche.com/k12/washington-preparatory-school-bothell-wa/" target="_blank" rel="noopener noreferrer">Niche</a>
+        <a href="https://www.facebook.com/profile.php?id=100083351671753" target="_blank" rel="noopener noreferrer">Facebook</a>
+    </div>
+    <div class="copyright">© 2018–2026 Washington Preparatory School</div>
 </div>
 
 <!-- 白色信件弹窗 -->
@@ -325,16 +329,13 @@
     <div class="modal-card">
         <span class="close-modal" id="closeModalBtn">&times;</span>
         <h2>From Our Head of School</h2>
-        <div id="letterContent" class="letter-text">
-            <!-- 动态逐词填充内容，保持纯文字 -->
-        </div>
+        <div id="letterContent" class="letter-text"></div>
         <div class="signature">Mindy J. Watson<br>Head of School</div>
     </div>
 </div>
 
 <script>
-    // 完整的校长信原文（单词逐个出现）
-    const fullText = `Welcome to Washington Preparatory School (WAPrep), a 6th -12th-grade college preparatory school that emphasizes STEM, project learning, communication skills, and entrepreneurial thinking. WAPrep opened its doors in the fall of 2018, and the faculty are looking forward to beginning our seventh academic school year.
+    const fullLetter = `Welcome to Washington Preparatory School (WAPrep), a 6th -12th-grade college preparatory school that emphasizes STEM, project learning, communication skills, and entrepreneurial thinking. WAPrep opened its doors in the fall of 2018, and the faculty are looking forward to beginning our seventh academic school year.
 
 WA Prep has been committed to continuously improve and uphold the standards to which our accrediting association, Accreditation International, expects from us as evidenced by its successful 5-year review and renewal, in addition the school is approved by the Washington state board of education. It was a goal from the very beginning to become an approved International Baccalaureate Organization, which was earned in 2020. In 2025, the schools third cohort of seniors is working hard to complete the IB diploma. Our school is proud to be an international, multicultural, and multilingual campus.
 
@@ -355,48 +356,38 @@ I invite you to become a part of the Washington Preparatory School experience. I
 
     function animateWords(text, element) {
         element.innerHTML = '';
-        // 按单词分割，保留标点与换行
-        const words = text.split(/(\s+)/);  // 保留空格和换行符
-        words.forEach(word => {
-            if (word === ' ') {
+        const words = text.split(/(\s+)/);
+        for (let w of words) {
+            if (w === ' ') {
                 const spaceSpan = document.createElement('span');
                 spaceSpan.innerHTML = ' ';
                 element.appendChild(spaceSpan);
-            } else if (word === '\n') {
-                const br = document.createElement('br');
-                element.appendChild(br);
-            } else if (word.trim().length > 0) {
+            } else if (w === '\n') {
+                element.appendChild(document.createElement('br'));
+            } else if (w.trim().length > 0) {
                 const span = document.createElement('span');
                 span.className = 'word';
-                span.textContent = word;
+                span.textContent = w;
                 element.appendChild(span);
-                // 加空格，但后面自然连接即可
-                const afterSpan = document.createElement('span');
-                afterSpan.innerHTML = ' ';
-                element.appendChild(afterSpan);
-            } else if (word === '') {
-                // 忽略
-            } else {
-                const span = document.createElement('span');
-                span.textContent = word;
-                element.appendChild(span);
+                const afterSpace = document.createElement('span');
+                afterSpace.innerHTML = ' ';
+                element.appendChild(afterSpace);
             }
-        });
+        }
         const allWords = document.querySelectorAll('#letterContent .word');
         allWords.forEach((wordSpan, idx) => {
-            wordSpan.style.animationDelay = `${idx * 0.04}s`;
+            wordSpan.style.animationDelay = `${idx * 0.035}s`;
             wordSpan.style.animationFillMode = 'forwards';
         });
     }
 
     openBtn.addEventListener('click', () => {
         modal.style.display = 'flex';
-        animateWords(fullText, letterContainer);
+        animateWords(fullLetter, letterContainer);
     });
-
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
-        letterContainer.innerHTML = ''; // 清空，下次重新动画
+        letterContainer.innerHTML = '';
     });
     window.addEventListener('click', (e) => {
         if (e.target === modal) {
