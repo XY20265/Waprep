@@ -84,41 +84,32 @@
             100% { opacity: 0.8; }
         }
 
-        /* 内容区，撑开高度让底部自然沉底 */
+        /* 内容区，标题靠上 */
         .content {
             position: relative;
             z-index: 2;
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
-            padding: 4rem 2rem 3rem 2rem;
+            padding: 2rem 2rem 3rem 2rem;
         }
 
         .hero-center {
             text-align: center;
             max-width: 900px;
-            margin: 1rem auto;
+            margin: 0 auto;
         }
 
-        /* Welcome 标题：黑/蓝/紫渐变 */
+        /* 主标题：固定亮紫色 */
         .main-welcome {
             font-size: clamp(2.2rem, 8vw, 4.5rem);
             font-weight: 800;
             letter-spacing: -0.02em;
             margin-bottom: 2rem;
-            background: linear-gradient(135deg, #0a0f2a, #2c3e8f, #5a4a9e, #0f0c2c);
-            background-size: 300% auto;
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            animation: gradientShift 6s ease infinite;
-        }
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            color: #b87cff;
+            text-shadow: 0 0 8px rgba(160, 120, 255, 0.5);
         }
 
         .sub-line {
@@ -142,47 +133,63 @@
             }
         }
 
-        /* 底部区域容器 - 固定在最底部 */
+        /* "If you want to know more, click here !" 行 */
+        .more-line {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            color: #e0e7ff;
+            opacity: 0;
+            animation: fadeUp 0.6s forwards;
+            animation-delay: 1s;
+        }
+        .click-link {
+            color: #ffd966;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        .click-link:hover {
+            color: #ffb347;
+        }
+
+        /* 底部区域：信封图标（链接到校长信独立页面）+ 两个链接 */
         .bottom-section {
             position: relative;
             z-index: 2;
             width: 100%;
-            margin-top: 4rem;
+            margin-top: 2rem;
             padding: 1rem 2rem 2rem 2rem;
             background: transparent;
         }
 
-        /* Letter 按钮：左对齐，不要居中，放在链接前面 */
-        .letter-btn-wrapper {
+        .icon-only-btn {
             width: 100%;
             display: flex;
             justify-content: flex-start;
             margin-bottom: 1.5rem;
             padding-left: 1rem;
         }
-        .letter-btn {
+        .envelope-icon {
             background: rgba(30, 40, 70, 0.6);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(150, 170, 220, 0.8);
-            padding: 0.6rem 1.8rem;
-            border-radius: 40px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #e2eaff;
+            padding: 0.6rem 0.9rem;
+            border-radius: 50%;
+            font-size: 1.6rem;
             cursor: pointer;
             transition: 0.25s;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
+            line-height: 1;
+            text-decoration: none;
+            color: inherit;
         }
-        .letter-btn:hover {
+        .envelope-icon:hover {
             background: rgba(80, 100, 150, 0.7);
-            color: #ffffff;
+            transform: scale(1.05);
             border-color: #b8ceff;
-            transform: scale(1.02);
         }
 
-        /* 两个链接容器：真正底部 */
         .footer-links {
             display: flex;
             gap: 2rem;
@@ -211,83 +218,10 @@
             margin-top: 0.3rem;
         }
 
-        /* 白色信笺弹窗 */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(5, 3, 15, 0.85);
-            backdrop-filter: blur(6px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-card {
-            background: #fffef7;
-            max-width: 750px;
-            width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
-            border-radius: 28px;
-            padding: 2rem 2rem 2rem 2rem;
-            box-shadow: 0 30px 50px rgba(0,0,0,0.5);
-            font-family: 'Georgia', 'Times New Roman', serif;
-            position: relative;
-            animation: modalPop 0.3s ease;
-        }
-        @keyframes modalPop {
-            from { opacity: 0; transform: scale(0.96) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        .modal-card h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            border-left: 6px solid #a47c48;
-            padding-left: 1rem;
-            margin-bottom: 1.2rem;
-            color: #2f2a23;
-        }
-        .letter-text {
-            font-size: 1rem;
-            line-height: 1.65;
-            color: #232b30;
-        }
-        .word {
-            display: inline-block;
-            opacity: 0;
-            animation: wordAppear 0.04s forwards;
-        }
-        @keyframes wordAppear {
-            from { opacity: 0; transform: translateX(4px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        .close-modal {
-            position: absolute;
-            top: 0.8rem;
-            right: 1.2rem;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #aa7e4c;
-            transition: 0.2s;
-        }
-        .close-modal:hover {
-            color: black;
-        }
-        .signature {
-            margin-top: 1.8rem;
-            text-align: right;
-            font-style: italic;
-            font-weight: 600;
-            border-top: 1px solid #e2d5bc;
-            padding-top: 1rem;
-        }
         @media (max-width: 650px) {
             .sub-line { font-size: 1rem; }
             .main-welcome { font-size: 2rem; }
-            .letter-btn { font-size: 0.85rem; }
+            .envelope-icon { font-size: 1.3rem; padding: 0.5rem 0.7rem; }
             .footer-links { gap: 1rem; }
         }
     </style>
@@ -307,15 +241,16 @@
         <div class="sub-line">Expert instruction by an internationally trained, world-class faculty.</div>
         <div class="sub-line">Small group learning powered by STEM-infused projects.</div>
         <div class="sub-line">Flexible, diverse programming that caters to each individual student.</div>
+        
+        <div class="more-line">
+            If you want to know more, <a href="more.html" class="click-link">click here</a> !
+        </div>
     </div>
 </div>
 
-<!-- 底部区域：letter按钮（左对齐，在链接前面） + 两个链接 + 版权 -->
 <div class="bottom-section">
-    <div class="letter-btn-wrapper">
-        <div class="letter-btn" id="openLetterBtn">
-            📬 Read Letter from Head of School
-        </div>
+    <div class="icon-only-btn">
+        <a href="head-letter.html" class="envelope-icon">📬</a>
     </div>
     <div class="footer-links">
         <a href="https://www.niche.com/k12/washington-preparatory-school-bothell-wa/" target="_blank" rel="noopener noreferrer">Niche</a>
@@ -323,78 +258,5 @@
     </div>
     <div class="copyright">© 2018–2026 Washington Preparatory School</div>
 </div>
-
-<!-- 白色信件弹窗 -->
-<div id="letterModal" class="modal">
-    <div class="modal-card">
-        <span class="close-modal" id="closeModalBtn">&times;</span>
-        <h2>From Our Head of School</h2>
-        <div id="letterContent" class="letter-text"></div>
-        <div class="signature">Mindy J. Watson<br>Head of School</div>
-    </div>
-</div>
-
-<script>
-    const fullLetter = `Welcome to Washington Preparatory School (WAPrep), a 6th -12th-grade college preparatory school that emphasizes STEM, project learning, communication skills, and entrepreneurial thinking. WAPrep opened its doors in the fall of 2018, and the faculty are looking forward to beginning our seventh academic school year.
-
-WA Prep has been committed to continuously improve and uphold the standards to which our accrediting association, Accreditation International, expects from us as evidenced by its successful 5-year review and renewal, in addition the school is approved by the Washington state board of education. It was a goal from the very beginning to become an approved International Baccalaureate Organization, which was earned in 2020. In 2025, the schools third cohort of seniors is working hard to complete the IB diploma. Our school is proud to be an international, multicultural, and multilingual campus.
-
-Our facilities have evolved as well. In 2023, the school relocated across the road from our original business park facility. This relocation provided a stand-alone building to call our own and is ideally located across the street from the future campus that is currently under construction.
-
-Visitors often ask, "What are the differentiators that WA Prep offers that other independent schools do not?" I respond that our faculty are life-long learners, experts in their fields, strategic planners, and coaches who motivate our students to achieve their goals. Our students thrive because they are willing to work alongside their peers and teachers. It is a willingness that enables them to embrace new and unfamiliar challenges with what I call an "I can do this" approach.
-
-The guiding principles of WA Prep, our five pillars, allow students to engage in our rapidly changing world effectively. Academic excellence achieved with the internationally renowned International Baccalaureate Diploma Program for juniors and seniors, AP Calculus, AP Physics and AP Computer Science, international and intercultural involvement, experiential learning opportunities, service learning and leadership, and STEEM (science, technology, entrepreneurship engineering, and math) creates a relevant and healthy recipe for successful college preparation.
-
-Washington State has been my home for the last thirty-two years. Before jumping on board with WA Prep, I enjoyed serving in two highly respected independent schools. Nine years at Charles Wright Academy and, more recently, twenty years at Seattle Academy of Arts and Sciences. I have served as teacher, coach, outdoor and international trip leader, dean of students, head of upper school, and dean of faculty for STEM program areas. In each of these roles, I was responsible for providing opportunities for each student to grow academically and personally.
-
-I invite you to become a part of the Washington Preparatory School experience. It is a school that will inspire students to be prepared for future careers and embrace life to its fullest`;
-
-    const modal = document.getElementById('letterModal');
-    const openBtn = document.getElementById('openLetterBtn');
-    const closeBtn = document.getElementById('closeModalBtn');
-    const letterContainer = document.getElementById('letterContent');
-
-    function animateWords(text, element) {
-        element.innerHTML = '';
-        const words = text.split(/(\s+)/);
-        for (let w of words) {
-            if (w === ' ') {
-                const spaceSpan = document.createElement('span');
-                spaceSpan.innerHTML = ' ';
-                element.appendChild(spaceSpan);
-            } else if (w === '\n') {
-                element.appendChild(document.createElement('br'));
-            } else if (w.trim().length > 0) {
-                const span = document.createElement('span');
-                span.className = 'word';
-                span.textContent = w;
-                element.appendChild(span);
-                const afterSpace = document.createElement('span');
-                afterSpace.innerHTML = ' ';
-                element.appendChild(afterSpace);
-            }
-        }
-        const allWords = document.querySelectorAll('#letterContent .word');
-        allWords.forEach((wordSpan, idx) => {
-            wordSpan.style.animationDelay = `${idx * 0.035}s`;
-            wordSpan.style.animationFillMode = 'forwards';
-        });
-    }
-
-    openBtn.addEventListener('click', () => {
-        modal.style.display = 'flex';
-        animateWords(fullLetter, letterContainer);
-    });
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-        letterContainer.innerHTML = '';
-    });
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-            letterContainer.innerHTML = '';
-        }
-    });
-</script>
 </body>
 </html>
