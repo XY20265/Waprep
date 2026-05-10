@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Our Head of School | Washington Preparatory School</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(ellipse at 30% 40%, #0a0f2a, #020510, #00010a);
+            font-family: 'Georgia', 'Times New Roman', 'Inter', serif;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            color: #e6eaff;
+        }
+
+        /* 流星效果 */
+        .shooting-star {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            background: linear-gradient(45deg, #ffffff, #b0c4ff);
+            border-radius: 50%;
+            box-shadow: 0 0 6px 2px rgba(160, 200, 255, 0.8);
+            opacity: 0.9;
+            animation: shoot 4s linear infinite;
+        }
+        @keyframes shoot {
+            0% {
+                transform: translateX(0) translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            80% { opacity: 1; }
+            100% {
+                transform: translateX(-400px) translateY(300px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+        .star1 { top: 8%; left: 85%; width: 3px; height: 3px; animation-duration: 3s; animation-delay: 0s; }
+        .star2 { top: 25%; left: 70%; width: 2px; height: 2px; animation-duration: 4.2s; animation-delay: 0.8s; }
+        .star3 { top: 50%; left: 80%; width: 4px; height: 4px; animation-duration: 5s; animation-delay: 1.5s; }
+        .star4 { top: 70%; left: 60%; width: 2px; height: 2px; animation-duration: 3.6s; animation-delay: 2.2s; }
+        .star5 { top: 15%; left: 90%; width: 3px; height: 3px; animation-duration: 4.8s; animation-delay: 0.3s; }
+        .star6 { top: 40%; left: 50%; width: 2px; height: 2px; animation-duration: 3.9s; animation-delay: 1.1s; }
+        .star7 { top: 85%; left: 75%; width: 3px; height: 3px; animation-duration: 4.5s; animation-delay: 2.7s; }
+
+        /* 星空闪烁 */
+        .bg-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(1px 1px at 12% 22%, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 1px at 45% 68%, #bbd9ff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 78% 32%, #fff, rgba(0,0,0,0)),
+                radial-gradient(3px 2px at 34% 91%, #d9c8ff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 91% 55%, #fff, rgba(0,0,0,0));
+            background-repeat: no-repeat;
+            background-size: 300px 300px, 200px 200px, 250px 250px, 180px 180px, 220px 220px;
+            opacity: 0.6;
+            z-index: 0;
+            animation: starTwinkle 7s infinite alternate;
+        }
+        @keyframes starTwinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.8; }
+        }
+
+        /* 主要内容容器 */
+        .letter-container {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: rgba(15, 20, 35, 0.65);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            border: 1px solid rgba(210, 180, 140, 0.3);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border-left: 6px solid #b87cff;
+            padding-left: 1rem;
+            color: #f0e6d0;
+        }
+
+        .letter-text {
+            font-size: 1.05rem;
+            line-height: 1.65;
+            color: #f0f2f5;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
+        }
+
+        .word {
+            display: inline-block;
+            opacity: 0;
+            animation: wordAppear 0.04s forwards;
+        }
+        @keyframes wordAppear {
+            from {
+                opacity: 0;
+                transform: translateX(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .signature {
+            margin-top: 2rem;
+            text-align: right;
+            font-style: italic;
+            font-weight: 500;
+            border-top: 1px solid rgba(210,180,140,0.4);
+            padding-top: 1.2rem;
+            font-size: 1.1rem;
+            color: #e6d5a8;
+        }
+
+        /* 返回主页链接 */
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #b0c4ff;
+            text-decoration: none;
+            border-bottom: 1px dashed #b0c4ff;
+            transition: 0.2s;
+        }
+        .back-link:hover {
+            color: #ffdfa5;
+            border-bottom-color: #ffdfa5;
+        }
+
+        /* 底部与主页保持一致 */
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem 1rem;
+            border-top: 1px solid rgba(210,180,140,0.2);
+        }
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 0.8rem;
+        }
+        .footer-links a {
+            color: #9ab3e0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .footer-links a:hover {
+            color: #ffddb0;
+        }
+        .copyright {
+            font-size: 0.7rem;
+            color: #6a7a9e;
+        }
+
+        @media (max-width: 650px) {
+            .letter-container {
+                margin: 1.5rem;
+                padding: 1.2rem;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .letter-text {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="shooting-star">
+    <div class="star star1"></div><div class="star star2"></div><div class="star star3"></div>
+    <div class="star star4"></div><div class="star star5"></div><div class="star star6"></div>
+    <div class="star star7"></div>
+</div>
+<div class="bg-stars"></div>
+
+<div class="letter-container">
+    <h1>From Our Head of School</h1>
+    <div id="letterContent" class="letter-text"></div>
+    <div class="signature">Mindy J. Watson<br>Head of School</div>
+    <div style="margin-top: 1.5rem;">
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </div>
+</div>
+
+<div class="footer-bottom">
+    <div class="footer-links">
+        <a href="https://www.niche.com/k12/washington-preparatory-school-bothell-wa/" target="_blank" rel="noopener noreferrer">Niche</a>
+        <a href="https://www.facebook.com/profile.php?id=100083351671753" target="_blank" rel="noopener noreferrer">Facebook</a>
+    </div>
+    <div class="copyright">© 2018–2026 Washington Preparatory School</div>
+</div>
+
+<script>
+    const fullText = `Welcome to Washington Preparatory School (WAPrep), a 6th -12th-grade college preparatory school that emphasizes STEM, project learning, communication skills, and entrepreneurial thinking. WAPrep opened its doors in the fall of 2018, and the faculty are looking forward to beginning our seventh academic school year.
+
+WA Prep has been committed to continuously improve and uphold the standards to which our accrediting association, Accreditation International, expects from us as evidenced by its successful 5-year review and renewal, in addition the school is approved by the Washington state board of education. It was a goal from the very beginning to become an approved International Baccalaureate Organization, which was earned in 2020. In 2025, the schools third cohort of seniors is working hard to complete the IB diploma. Our school is proud to be an international, multicultural, and multilingual campus.
+
+Our facilities have evolved as well. In 2023, the school relocated across the road from our original business park facility. This relocation provided a stand-alone building to call our own and is ideally located across the street from the future campus that is currently under construction.
+
+Visitors often ask, "What are the differentiators that WA Prep offers that other independent schools do not?" I respond that our faculty are life-long learners, experts in their fields, strategic planners, and coaches who motivate our students to achieve their goals. Our students thrive because they are willing to work alongside their peers and teachers. It is a willingness that enables them to embrace new and unfamiliar challenges with what I call an "I can do this" approach.
+
+The guiding principles of WA Prep, our five pillars, allow students to engage in our rapidly changing world effectively. Academic excellence achieved with the internationally renowned International Baccalaureate Diploma Program for juniors and seniors, AP Calculus, AP Physics and AP Computer Science, international and intercultural involvement, experiential learning opportunities, service learning and leadership, and STEEM (science, technology, entrepreneurship engineering, and math) creates a relevant and healthy recipe for successful college preparation.
+
+Washington State has been my home for the last thirty-two years. Before jumping on board with WA Prep, I enjoyed serving in two highly respected independent schools. Nine years at Charles Wright Academy and, more recently, twenty years at Seattle Academy of Arts and Sciences. I have served as teacher, coach, outdoor and international trip leader, dean of students, head of upper school, and dean of faculty for STEM program areas. In each of these roles, I was responsible for providing opportunities for each student to grow academically and personally.
+
+I invite you to become a part of the Washington Preparatory School experience. It is a school that will inspire students to be prepared for future careers and embrace life to its fullest`;
+
+    function animateWords(text, element) {
+        element.innerHTML = '';
+        const words = text.split(/(\s+)/);
+        for (let w of words) {
+            if (w === ' ') {
+                const spaceSpan = document.createElement('span');
+                spaceSpan.innerHTML = ' ';
+                element.appendChild(spaceSpan);
+            } else if (w === '\n') {
+                element.appendChild(document.createElement('br'));
+            } else if (w.trim().length > 0) {
+                const span = document.createElement('span');
+                span.className = 'word';
+                span.textContent = w;
+                element.appendChild(span);
+                const afterSpace = document.createElement('span');
+                afterSpace.innerHTML = ' ';
+                element.appendChild(afterSpace);
+            }
+        }
+        const allWords = document.querySelectorAll('#letterContent .word');
+        allWords.forEach((wordSpan, idx) => {
+            wordSpan.style.animationDelay = `${idx * 0.035}s`;
+            wordSpan.style.animationFillMode = 'forwards';
+        });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        animateWords(fullText, document.getElementById('letterContent'));
+    });
+</script>
+</body>
+</html>
